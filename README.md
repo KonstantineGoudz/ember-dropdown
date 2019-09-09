@@ -1,57 +1,66 @@
 # lister
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is an example of how to setup a dropdown selection in ember
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
+You will need to assign a controller for your route for this to work properly
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+# quick example
 
-## Installation
+-
+    create a route
+    ```bash
+    ember generate route drop
+    ```
+-
+    create a contoller 
+    ```bash
+    ember generate controller drop-controller
+    ```
+- 
+    associate the controller with the route in *`app/routes/drop.js`*
+    ```javascript
+    import Route from '@ember/routing/route';
 
-* `git clone <repository-url>` this repository
-* `cd lister`
-* `npm install`
+    export default Route.extend({
+        controllerName: 'dropController', // the generated controller
+        model() { // the model for the  route which will be passed to the conroller
+            return {
+                options: [
+                    "test",
+                    "cool",
+                    "ffart"
+                ]
+            }
+        }
+    });
 
-## Running / Development
+    ```
+-
+    create a contoller 
+    ```bash
+    ember generate controller drop-controller
+    ```
+-
+    Implement the action in the controller *`app\controllers\drop-controller.js`*
+    ```javascript
+    import Controller from '@ember/controller';
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+    export default Controller.extend({
+        actions:{
+            sel(val){
+                alert(val)
+            }
+        }
+    });
+    ```
+- Finally in the *`app\templates\drop.hbs`*
+    ```handlebars
+    <select onchange={{action "sel" value="target.value"}} >
+        {{#each model.options as |opt|}}
+            <option value={{opt}}>{{opt}}</option>
+        {{/each}}
+    </select>
+    {{outlet}}
+    ```

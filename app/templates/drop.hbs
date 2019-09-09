@@ -1,0 +1,6 @@
+<select onchange={{action "sel" value="target.value"}} >
+    {{#each model.options as |opt|}}
+        <option value={{opt}}>{{opt}}</option>
+    {{/each}}
+</select>
+{{outlet}}

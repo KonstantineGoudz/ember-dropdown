@@ -37,11 +37,7 @@ You will need to assign a controller for your route for this to work properly
     });
 
     ```
--
-    create a contoller 
-    ```bash
-    ember generate controller drop-controller
-    ```
+
 -
     Implement the action in the controller *`app\controllers\drop-controller.js`*
     ```javascript
